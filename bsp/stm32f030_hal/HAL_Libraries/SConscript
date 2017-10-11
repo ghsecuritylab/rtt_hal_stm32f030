@@ -1,0 +1,32 @@
+import rtconfig
+Import('RTT_ROOT')
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.      system_stm32f0xx.c
+src = Split("""
+CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c
+""")
+
+src += Glob('STM32F0xx_HAL_Driver/Src/*.c')                
+
+#add for startup script         CMSIS/Device/ST/STM32F0xx/Source/Templates/arm
+if rtconfig.CROSS_TOOL == 'gcc':
+     src = src + ['CMSIS/Device/ST/STM32F0xx/Source/Templates/gcc/startup_stm32f0xx.s']        #startup_stm32f0xx.s      startup_stm32f030x8.s
+elif rtconfig.CROSS_TOOL == 'keil':
+     src = src + ['CMSIS/ST/STM32F0xx/Source/Templates/arm/startup_stm32f0xx.s']
+elif rtconfig.CROSS_TOOL == 'iar':
+     src = src + ['CMSIS/ST/STM32F0xx/Source/Templates/iar/startup_stm32f0xx.s']
+
+path = [cwd + '/STM32F0xx_HAL_Driver/Inc',                             
+    cwd + '/CMSIS/Include',                                
+    cwd + '/CMSIS/Device/ST/STM32F0xx/Include']                  
+
+#CPPDEFINES = ['USE_STDPERIPH_DRIVER', rtconfig.STM32_TYPE]
+CPPDEFINES = ['USE_HAL_DRIVER']
+#CPPDEFINES = ['USE_HAL_DRIVER', rtconfig.STM32_TYPE]
+group = DefineGroup('STM32_HAL', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

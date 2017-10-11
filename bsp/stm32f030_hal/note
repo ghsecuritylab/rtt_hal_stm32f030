@@ -1,0 +1,9 @@
+在stm32f0xx_hal.h中添加：
+#undef NULL
+#define NULL 0                   
+
+程序下载之后未运行？？？？ GDB调试 ： http://blog.csdn.net/zhengyangliu123/article/details/54934719
+
+将启动文件中heap大小设置为0
+
+gdb调试中出现No symbol table is loaded. Use the "file" command.问题 : 添加-g调试参数
