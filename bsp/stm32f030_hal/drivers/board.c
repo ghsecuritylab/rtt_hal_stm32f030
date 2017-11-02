@@ -167,6 +167,10 @@ void rt_hw_board_init()
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif
+
+#ifdef RT_USING_FINSH
+	//finsh_system_init();
+#endif
 }
 
 /*@}*/

@@ -39,6 +39,7 @@ static void led_thread_entry(void* parameter)
 		rt_hw_led_off();
 		rt_thread_delay(RT_TICK_PER_SECOND);
 		rt_kprintf("The system is running!!!\r\n");
+		rt_thread_delay(RT_TICK_PER_SECOND);
 	}
 }
 
@@ -53,7 +54,7 @@ static void rt_init_thread_entry(void* parameter)
 
 /* Set finsh device */
 #ifdef  RT_USING_FINSH
-    finsh_set_device(RT_CONSOLE_DEVICE_NAME);
+    //finsh_set_device(RT_CONSOLE_DEVICE_NAME);         //2017-11-2
 #endif  /* RT_USING_FINSH */
 
     /* Create led thread */

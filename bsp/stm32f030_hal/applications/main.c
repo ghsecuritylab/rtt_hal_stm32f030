@@ -102,6 +102,12 @@ void rtthread_startup(void)
 	/* start scheduler */
 	rt_system_scheduler_start();
 
+	/* Set finsh device */
+#ifdef  RT_USING_FINSH
+	finsh_system_init();
+	finsh_set_device(RT_CONSOLE_DEVICE_NAME);
+#endif  /* RT_USING_FINSH */
+
 	/* never reach here */
 	return ;
 }

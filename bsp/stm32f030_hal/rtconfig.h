@@ -89,7 +89,12 @@
 //#define FINSH_USING_SYMTAB
 //#define FINSH_USING_DESCRIPTION
 #define FINSH_USING_MSH
-#define FINSH_USING_MSH_ONLY
+//#define FINSH_USING_MSH_ONLY
+
+/*
+如果打开了FINSH_USING_MSH而没有打开FINSH_USING_MSH_ONLY，finsh同时支持两种c-style模式与msh模式，但是默认进入c-style模式，
+执行 msh()即可切换到msh模式，在msh模式下执行 exit后即退回到c-style模式。
+*/
 
 /* SECTION: libc management */
 // #define RT_USING_LIBC

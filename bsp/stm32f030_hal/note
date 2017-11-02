@@ -7,3 +7,14 @@
 将启动文件中heap大小设置为0
 
 gdb调试中出现No symbol table is loaded. Use the "file" command.问题 : 添加-g调试参数
+
+/* 2017-11-2 */
+finsh不能使用：http://www.rt-thread.org/phpBB3/topic2867.html
+	/* Set finsh device */
+#ifdef  RT_USING_FINSH
+	finsh_system_init();
+	finsh_set_device(RT_CONSOLE_DEVICE_NAME);
+#endif  /* RT_USING_FINSH */
+将finsh初始化放在main.c->void rtthread_startup(void)->rt_system_scheduler_start(); 之后
+
+
